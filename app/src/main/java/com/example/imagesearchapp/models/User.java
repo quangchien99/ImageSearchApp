@@ -3,8 +3,17 @@ package com.example.imagesearchapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User implements Parcelable {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("username")
+    @Expose
     private String userName;
 
     public User(String name, String userName) {
@@ -20,17 +29,6 @@ public class User implements Parcelable {
         userName = in.readString();
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     public String getName() {
         return name;
@@ -54,16 +52,5 @@ public class User implements Parcelable {
                 "name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(userName);
     }
 }

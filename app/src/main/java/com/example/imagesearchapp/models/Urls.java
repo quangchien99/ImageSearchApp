@@ -3,14 +3,29 @@ package com.example.imagesearchapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class PhotoUrls implements Parcelable {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Urls implements Serializable {
+    @SerializedName("raw")
+    @Expose
     private String raw;
+    @SerializedName("full")
+    @Expose
     private String full;
+    @SerializedName("regular")
+    @Expose
     private String regular;
+    @SerializedName("small")
+    @Expose
     private String small;
+    @SerializedName("thumb")
+    @Expose
     private String thumb;
 
-    public PhotoUrls(String raw, String full, String regular, String small, String thumb) {
+    public Urls(String raw, String full, String regular, String small, String thumb) {
         this.raw = raw;
         this.full = full;
         this.regular = regular;
@@ -18,10 +33,10 @@ public class PhotoUrls implements Parcelable {
         this.thumb = thumb;
     }
 
-    public PhotoUrls() {
+    public Urls() {
     }
 
-    protected PhotoUrls(Parcel in) {
+    protected Urls(Parcel in) {
         raw = in.readString();
         full = in.readString();
         regular = in.readString();
@@ -29,17 +44,7 @@ public class PhotoUrls implements Parcelable {
         thumb = in.readString();
     }
 
-    public static final Creator<PhotoUrls> CREATOR = new Creator<PhotoUrls>() {
-        @Override
-        public PhotoUrls createFromParcel(Parcel in) {
-            return new PhotoUrls(in);
-        }
 
-        @Override
-        public PhotoUrls[] newArray(int size) {
-            return new PhotoUrls[size];
-        }
-    };
 
     public String getRaw() {
         return raw;
@@ -92,17 +97,4 @@ public class PhotoUrls implements Parcelable {
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(raw);
-        dest.writeString(full);
-        dest.writeString(regular);
-        dest.writeString(small);
-        dest.writeString(thumb);
-    }
 }

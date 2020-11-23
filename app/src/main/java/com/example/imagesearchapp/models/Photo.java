@@ -1,40 +1,41 @@
 package com.example.imagesearchapp.models;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-public class UnsplashPhoto implements Parcelable {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Photo implements Serializable {
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("description")
+    @Expose
     private String description;
-    private PhotoUrls photoUrl;
+    @SerializedName("urls")
+    @Expose
+    private Urls photoUrl;
+    @SerializedName("user")
+    @Expose
     private User user;
 
-    public UnsplashPhoto() {
+    public Photo() {
     }
 
-    public UnsplashPhoto(String id, String description, PhotoUrls photoUrl, User user) {
+    public Photo(String id, String description, Urls photoUrl, User user) {
         this.id = id;
         this.description = description;
         this.photoUrl = photoUrl;
         this.user = user;
     }
 
-    protected UnsplashPhoto(Parcel in) {
+    protected Photo(Parcel in) {
         id = in.readString();
         description = in.readString();
     }
 
-    public static final Creator<UnsplashPhoto> CREATOR = new Creator<UnsplashPhoto>() {
-        @Override
-        public UnsplashPhoto createFromParcel(Parcel in) {
-            return new UnsplashPhoto(in);
-        }
-
-        @Override
-        public UnsplashPhoto[] newArray(int size) {
-            return new UnsplashPhoto[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -52,11 +53,11 @@ public class UnsplashPhoto implements Parcelable {
         this.description = description;
     }
 
-    public PhotoUrls getPhotoUrl() {
+    public Urls getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(PhotoUrls photoUrl) {
+    public void setPhotoUrl(Urls photoUrl) {
         this.photoUrl = photoUrl;
     }
 
@@ -78,14 +79,4 @@ public class UnsplashPhoto implements Parcelable {
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(description);
-    }
 }
