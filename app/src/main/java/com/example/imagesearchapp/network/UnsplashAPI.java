@@ -2,10 +2,10 @@ package com.example.imagesearchapp.network;
 
 import com.example.imagesearchapp.models.Download;
 import com.example.imagesearchapp.models.Photo;
-import com.example.imagesearchapp.models.SearchResults;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -16,7 +16,7 @@ public interface UnsplashAPI {
     Call<Photo> getPhoto(@Path("id") String id, @Query("w") Integer width, @Query("h") Integer height);
 
     @GET("photos")
-    Call<List<Photo>> getPhotos(@Query("page") Integer page, @Query("per_page") Integer perPage, @Query("order_by") String orderBy);
+    Observable<List<Photo>> getPhotos(@Query("page") Integer page, @Query("per_page") Integer perPage, @Query("order_by") String orderBy);
 
     @GET("photos/curated")
     Call<List<Photo>> getCuratedPhotos(@Query("page") Integer page, @Query("per_page") Integer perPage, @Query("order_by") String orderBy);
@@ -31,5 +31,5 @@ public interface UnsplashAPI {
     Call<Download> getPhotoDownloadLink(@Path("id") String id);
 
     @GET("search/photos")
-    Call<SearchResults> searchPhotos(@Query("query") String query, @Query("page") Integer page, @Query("per_page") Integer perPage, @Query("orientation") String orientation);
+    Call<List<Photo>> searchPhotos(@Query("query") String query, @Query("page") Integer page, @Query("per_page") Integer perPage, @Query("orientation") String orientation);
 }

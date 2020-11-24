@@ -1,9 +1,15 @@
 package com.example.imagesearchapp.repository;
 
+import com.example.imagesearchapp.models.Photo;
 import com.example.imagesearchapp.network.UnsplashAPI;
+
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.rxjava3.core.Observable;
 
 @Singleton
 public class PhotoRepository {
@@ -12,5 +18,9 @@ public class PhotoRepository {
     @Inject
     public PhotoRepository(UnsplashAPI unsplashAPI) {
         this.unsplashAPI = unsplashAPI;
+    }
+
+    public Observable<List<Photo>> getphotos(int page, int perPage, String order) {
+        return unsplashAPI.getPhotos(page, perPage, order);
     }
 }

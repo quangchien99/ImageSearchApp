@@ -9,20 +9,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.imagesearchapp.R;
-import com.example.imagesearchapp.di.NetworkModule;
 import com.example.imagesearchapp.models.Photo;
 import com.example.imagesearchapp.network.UnsplashAPI;
-import com.example.imagesearchapp.repository.PhotoRepository;
+import com.example.imagesearchapp.viewmodel.PhotoViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 @AndroidEntryPoint
 public class GalleryFragment extends Fragment {
@@ -37,16 +35,15 @@ public class GalleryFragment extends Fragment {
     }
 
     private void getPhotos() {
-        dataService = NetworkModule.provideAPI(NetworkModule.provideRetrofit(NetworkModule.provideGsonConverterFactory()));
-        dataService.getPhotos(1, null, "lastest").enqueue(new Callback<List<Photo>>() {
+        List<Photo> photos = new ArrayList<>();
+        PhotoViewModel photoViewModel = new ViewModelProvider(requireActivity()).get(PhotoViewModel.class);
+        photoViewModel.fetchPhotosFromNetwork();
+        photoViewModel.getmNetworkPhotos().observe(getViewLifecycleOwner(), new Observer<List<Photo>>() {
             @Override
-            public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
-                Log.d("qcpTag", "Succeeded - code=" + response.code() + "Body size:" + response.body().size());
-            }
-
-            @Override
-            public void onFailure(Call<List<Photo>> call, Throwable t) {
-                Log.d("qcpTag", "Failed");
+            public void onChanged(List<Photo> data) {
+                photos.clear();
+                photos.addAll(data);
+                Log.d("qcpTag", "Size: " + photos.size());
             }
         });
     }
