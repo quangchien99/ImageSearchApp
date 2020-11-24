@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface UnsplashInterface {
+public interface UnsplashAPI {
     @GET("photos/{id}")
     Call<Photo> getPhoto(@Path("id") String id, @Query("w") Integer width, @Query("h") Integer height);
 

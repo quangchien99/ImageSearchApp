@@ -11,18 +11,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.imagesearchapp.R;
+import com.example.imagesearchapp.di.NetworkModule;
 import com.example.imagesearchapp.models.Photo;
-import com.example.imagesearchapp.network.UnsplashClient;
-import com.example.imagesearchapp.network.UnsplashInterface;
+import com.example.imagesearchapp.network.UnsplashAPI;
+import com.example.imagesearchapp.repository.PhotoRepository;
 
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
+@AndroidEntryPoint
 public class GalleryFragment extends Fragment {
-    private UnsplashInterface dataService;
+    private UnsplashAPI dataService;
 
     @Nullable
     @Override
@@ -33,7 +37,7 @@ public class GalleryFragment extends Fragment {
     }
 
     private void getPhotos() {
-        dataService = UnsplashClient.getUnsplashClient().create(UnsplashInterface.class);
+        dataService = NetworkModule.provideAPI(NetworkModule.provideRetrofit(NetworkModule.provideGsonConverterFactory()));
         dataService.getPhotos(1, null, "lastest").enqueue(new Callback<List<Photo>>() {
             @Override
             public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
