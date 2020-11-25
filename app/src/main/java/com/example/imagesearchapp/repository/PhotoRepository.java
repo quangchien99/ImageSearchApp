@@ -1,6 +1,7 @@
 package com.example.imagesearchapp.repository;
 
 import com.example.imagesearchapp.models.Photo;
+import com.example.imagesearchapp.models.SearchResults;
 import com.example.imagesearchapp.network.UnsplashAPI;
 
 
@@ -22,5 +23,9 @@ public class PhotoRepository {
 
     public Observable<List<Photo>> getphotos(int page, int perPage, String order) {
         return unsplashAPI.getPhotos(page, perPage, order);
+    }
+
+    public Observable<SearchResults> searchPhotos(String query, int page, int perPage, String orientation) {
+        return unsplashAPI.searchPhotos(query, page, perPage, orientation);
     }
 }

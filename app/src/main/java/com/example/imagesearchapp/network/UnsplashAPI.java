@@ -2,6 +2,7 @@ package com.example.imagesearchapp.network;
 
 import com.example.imagesearchapp.models.Download;
 import com.example.imagesearchapp.models.Photo;
+import com.example.imagesearchapp.models.SearchResults;
 
 import java.util.List;
 
@@ -31,5 +32,5 @@ public interface UnsplashAPI {
     Call<Download> getPhotoDownloadLink(@Path("id") String id);
 
     @GET("search/photos")
-    Call<List<Photo>> searchPhotos(@Query("query") String query, @Query("page") Integer page, @Query("per_page") Integer perPage, @Query("orientation") String orientation);
+    Observable<SearchResults> searchPhotos(@Query("query") String query, @Query("page") Integer page, @Query("per_page") Integer perPage, @Query("orientation") String orientation);
 }
