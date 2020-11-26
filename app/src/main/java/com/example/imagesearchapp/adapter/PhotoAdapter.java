@@ -55,7 +55,7 @@ public class PhotoAdapter extends ListAdapter<Photo, PhotoAdapter.ViewHolder> {
             public void onItemClick(View view, int position, boolean isLongClick) {
                 if (isLongClick) {
                     Toast.makeText(context, "Long Click in position: " + position, Toast.LENGTH_LONG).show();
-                    
+
                 } else {
                     Log.d("qcpTag", "Short click in item " + position);
                     Photo photo = getItem(position);
