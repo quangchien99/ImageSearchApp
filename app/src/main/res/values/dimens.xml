@@ -3,4 +3,9 @@
     <dimen name="height_250dp">250dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
     <dimen name="layout_margin_10dp">10dp</dimen>
+    <dimen name="pađing_bottom_5dp">5dp</dimen>
+    <dimen name="margin_bottom_5dp">5dp</dimen>
+    <dimen name="margin_start_10dp">10dp</dimen>
+    <dimen name="margin_end_10dp">10dp</dimen>
+    <dimen name="height_300dp">300dp</dimen>
 </resources>

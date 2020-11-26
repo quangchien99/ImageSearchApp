@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="photo"
+            type="com.example.imagesearchapp.models.Photo" />
+    </data>
+
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.DetailsFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/pađing_bottom_5dp">
+
+                <ImageView
+                    android:id="@+id/img_photo"
+                    set_src="@{photo.photoUrl.regular}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_bottom_5dp"
+                    android:adjustViewBounds="true"
+                    tools:layout_height="@dimen/height_300dp"
+                    tools:scaleType="centerCrop"
+                    tools:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_10dp"
+                    android:layout_marginEnd="@dimen/margin_end_10dp"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    tools:text="This is the description"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_creator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_start_10dp"
+                    android:layout_marginEnd="@dimen/margin_end_10dp"
+                    android:text="@{photo.user.userName}"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:text="Created by Quang Chien from unplash"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+</layout>

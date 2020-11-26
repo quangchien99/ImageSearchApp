@@ -34,8 +34,8 @@ public class PhotoViewModel extends ViewModel {
         return mSearchResults;
     }
 
-    public void fetchPhotosFromNetwork() {
-        photoRepository.getphotos(Const.STARTING_PAGE_INDEX, 10, "latest")
+    public void fetchPhotosFromNetwork(int page) {
+        photoRepository.getphotos(page, 10, "latest")
                 .map(searchResults -> {
                     List<Photo> photos = searchResults;
                     return photos;
